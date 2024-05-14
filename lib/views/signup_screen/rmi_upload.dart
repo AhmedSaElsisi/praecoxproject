@@ -7,6 +7,8 @@ import 'package:praecoxproject/cubit/patient_login_cubit/patient_login_cubit.dar
 import 'package:praecoxproject/cubit/patient_login_cubit/patient_login_state.dart';
 import 'package:praecoxproject/style/app_colors.dart';
 
+import '../../cubit/patient_register_cubit/patient_register_cubit.dart';
+import '../../cubit/patient_register_cubit/patient_register_state.dart';
 import '../../widgets/custom_upload_container.dart';
 import '../../widgets/widget.dart';
 
@@ -36,12 +38,12 @@ class _RmiUploadState extends State<RmiUpload>
 
   @override
   Widget build(BuildContext context) {
-    return  BlocConsumer<LoginCubit,LoginState>(
+    return  BlocConsumer<PatientRegisterCubit,RegisterState>(
       listener: (context, state) {
 
       },
       builder: (context, state) {
-        var cubit = LoginCubit.get(context);
+        var cubit = PatientRegisterCubit.get(context);
         return Scaffold(
           body: SingleChildScrollView(
               child: Column(

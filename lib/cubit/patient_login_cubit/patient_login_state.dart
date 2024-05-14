@@ -11,7 +11,3 @@ class LoginError extends LoginState {
   LoginError(this.message);
 }
 
-class UploadImageSuccess extends LoginState {}
-
-class UploadImageLoading extends LoginState {}
-class UploadImageError extends LoginState {}

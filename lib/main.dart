@@ -21,6 +21,7 @@ import 'package:sizer/sizer.dart';
 import 'DailyCare/VeryMildCare/verymildcare.dart';
 import 'cubit/layout_cubit/layout_cubit.dart';
 import 'cubit/patient_login_cubit/patient_login_cubit.dart';
+import 'cubit/patient_register_cubit/patient_register_cubit.dart';
 import 'local_db/shared_preferences.dart';
 import 'medicants_screen/MildDemented/milddementedscreen.dart';
 import 'medicants_screen/ModerateDemented/moderatedementedscreen.dart';
@@ -50,6 +51,7 @@ class MyApp extends StatelessWidget {
           providers: [
             BlocProvider(create: (context) => LayoutCubit()),
             BlocProvider(create: (context)=> LoginCubit()),
+            BlocProvider(create: (context)=> PatientRegisterCubit()),
           ],
           child:  GetMaterialApp(
             debugShowCheckedModeBanner: false,

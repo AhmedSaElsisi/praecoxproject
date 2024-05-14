@@ -11,3 +11,7 @@ class RegisterError extends  RegisterState{
   final String message;
   RegisterError(this.message);
 }
+class UploadImageSuccess extends RegisterState {}
+
+class UploadImageLoading extends RegisterState {}
+class UploadImageError extends RegisterState {}
