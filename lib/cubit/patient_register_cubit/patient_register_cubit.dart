@@ -57,28 +57,8 @@ class PatientRegisterCubit extends Cubit<RegisterState> {
       emit(RegisterError(error.toString()));
     }
   }
-  String? imagePath;
-  String? imageName;
-  File? file;
-  PlatformFile? platformFile;
-  RmiUpload? rmi;
 
-  selectFile() async {
-    final _file = await FilePicker.platform.pickFiles(
-        type: FileType.custom, allowedExtensions: ['png', 'jpg', 'jpeg']);
-
-    if (_file != null) {
-      imagePath =_file.files[0].path;
-      imageName =_file.files[0].name;
-      file = File(_file.files.single.path!);
-      platformFile = _file.files.first;
-      print(file?.path);
-      print(_file.files[0].name);
-    }
-    loadingController.forward();
-  }
-
-  Future rmiUpload()async{
+  Future rmiUpload({String imagePath,String imageName})async{
     var data = FormData.fromMap({
       'image': [
         await MultipartFile.fromFile(imagePath!, filename: imageName)
