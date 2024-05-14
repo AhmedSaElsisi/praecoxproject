@@ -22,6 +22,26 @@ class RmiUpload extends StatefulWidget {
 class _RmiUploadState extends State<RmiUpload>
     with SingleTickerProviderStateMixin {
   late AnimationController loadingController;
+  String? imagePath;
+  String? imageName;
+  File? file;
+  PlatformFile? platformFile;
+  RmiUpload? rmi;
+
+  selectFile() async {
+    final _file = await FilePicker.platform.pickFiles(
+        type: FileType.custom, allowedExtensions: ['png', 'jpg', 'jpeg']);
+
+    if (_file != null) {
+      imagePath =_file.files[0].path;
+      imageName =_file.files[0].name;
+      file = File(_file.files.single.path!);
+      platformFile = _file.files.first;
+      print(file?.path);
+      print(_file.files[0].name);
+    }
+    loadingController.forward();
+  }
 
 
   @override
@@ -32,7 +52,6 @@ class _RmiUploadState extends State<RmiUpload>
     )..addListener(() {
       setState(() {});
     });
-
     super.initState();
   }
 
@@ -141,7 +160,7 @@ class _RmiUploadState extends State<RmiUpload>
                             minWidth: double.infinity,
                             height: 45,
                             onPressed: () {
-                              cubit.rmiUpload();
+                              cubit.rmiUpload(imagePath: imagePath,imageName: imageName);
                             },
                             color: AppTheme.basieColor,
                             child: const Text(
