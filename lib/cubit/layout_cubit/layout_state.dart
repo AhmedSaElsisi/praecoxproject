@@ -1,8 +1,8 @@
 part of 'layout_cubit.dart';
 
 @immutable
-abstract class LayoutState {}
+abstract class HomeState {}
 
-class LayoutInitial extends LayoutState {}
+class HomeInitial extends HomeState {}
 
-class ChangeBottomNacBarState extends LayoutState {}
+class ChangeBottomNacBarState extends HomeState {}

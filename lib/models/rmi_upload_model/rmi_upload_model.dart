@@ -1,11 +1,12 @@
-class RmiUpload {
+
+class RmiUploadModel{
   String? diagnosticStage;
   String? image;
   String? descriptionDiagnosis;
 
-  RmiUpload({this.diagnosticStage, this.image, this.descriptionDiagnosis});
+  RmiUploadModel({this.diagnosticStage, this.image, this.descriptionDiagnosis});
 
-  RmiUpload.fromJson(Map<String, dynamic> json) {
+  RmiUploadModel.fromJson(Map<String, dynamic> json) {
     diagnosticStage = json['Diagnostic_stage'];
     image = json['image'];
     descriptionDiagnosis = json['Description_Diagnosis'];

@@ -15,18 +15,22 @@ class SplashScreen extends StatefulWidget {
 class _SplashScreenState extends State<SplashScreen> {
   @override
   Widget build(BuildContext context) {
+    
     return AnimatedSplashScreen(splash:
-        Column(
-          children: [
-            Center(child: LottieBuilder.asset('assets/lottie/Animation - 1695301288233.json')),
-            const Text('Praecox App',style: TextStyle(
-              color: AppTheme.basieColor,
-              fontSize: 40,
-              fontWeight: FontWeight.bold,
-            ),),
-          ],
-
-
+        SafeArea(
+          child: Column(
+           children: [
+             Container(
+               padding: EdgeInsets.only(top: 120,left: 20,right: 20),
+               child: Image.asset('assets/images/logo.png'),
+             ),
+             Text('Praecox',style: TextStyle(
+                 fontSize: 48,
+                 fontWeight: FontWeight.bold,
+                 color: AppTheme.basieColor              ),
+             ),
+           ],
+          ),
         ),
 
          nextScreen: const OnBoardingScreen(),

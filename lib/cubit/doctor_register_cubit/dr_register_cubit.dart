@@ -1,6 +1,8 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import '../../local_db/shared_preferences.dart';
 import '../../models/doctor_register_model/doctor_reg_model.dart';
 import 'dr_register_state.dart';
 
@@ -39,14 +41,20 @@ class DoctorRegisterCubit extends Cubit<DoctorRegisterState> {
             'degree':doctorDegreeRegisterController.text,
             'password':doctorPasswordRegisterController.text,
             'password_confirmation':doctorPasswordConfirmationRegisterController.text,
-
-
           }
       );
 
       if (response.statusCode == 200) {
         emit(DoctorRegisterSuccess());
         doctorReg = DoctorRegister.fromJson(response.data);
+        SharedPrefrenceHelper.saveData(key: 'token', value: doctorReg!.token!);
+        doctorNameRegisterController.clear();
+        doctorEmailRegisterController.clear();
+        doctorPhonedRegisterController.clear();
+        doctorAddressRegisterController.clear();
+        doctorDegreeRegisterController.clear();
+        doctorPasswordRegisterController.clear();
+        doctorPasswordConfirmationRegisterController.clear();
       } else {
         emit(DoctorRegisterError('Login failed. Please check your credentials.'));
       }

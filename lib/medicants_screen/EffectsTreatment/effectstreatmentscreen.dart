@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:praecoxproject/views/home_screen/home_screen.dart';
 import 'package:praecoxproject/views/home_screen/layout_screen.dart';
 import '../../style/app_colors.dart';
+
 class EffectsTreatment extends StatelessWidget {
   const EffectsTreatment({super.key});
 
@@ -8,24 +10,29 @@ class EffectsTreatment extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          backgroundColor:const Color(0xFF404040) ,
+          backgroundColor: AppTheme.basieColor,
           shape: const RoundedRectangleBorder(
             borderRadius: BorderRadius.vertical(
               bottom: Radius.circular(45),
             ),
           ),
           leading: IconButton(
-            icon: const Icon(Icons.arrow_back,color: Colors.white,),
+            icon: const Icon(
+              Icons.arrow_back,
+              color: Colors.white,
+            ),
             onPressed: () {
-              Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>const LayoutScreen()));
+              Navigator.pushReplacement(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) =>  HomeScreen()));
             },
           ),
-          title: const Text('Medicants', style:
-          TextStyle(
-              color: Colors.white
-          ),),
+          title: const Text(
+            'Medicants',
+            style: TextStyle(color: Colors.white),
+          ),
           actions: [
-
             const SizedBox(width: 10),
           ],
         ),
@@ -41,8 +48,9 @@ class EffectsTreatment extends StatelessWidget {
                       height: 120,
                       child: Image.asset("assets/images/Pills.png")),
                 ),
-                const Text('Treatment of behavioral and psychological symptoms of dementia ( all stages of alzheimer disease)',
-                  textAlign:TextAlign.center ,
+                const Text(
+                  'Treatment of behavioral and psychological symptoms of dementia ( all stages of alzheimer disease)',
+                  textAlign: TextAlign.center,
                   style: TextStyle(
                     fontSize: 20,
                     fontWeight: FontWeight.bold,
@@ -179,8 +187,8 @@ class EffectsTreatment extends StatelessWidget {
                     ],
                   ),
                 ),
-
-                const Text('Go back to the doctor.',
+                const Text(
+                  'Go back to the doctor.',
                   textAlign: TextAlign.center,
                   style: TextStyle(
                     fontSize: 18,
@@ -190,26 +198,22 @@ class EffectsTreatment extends StatelessWidget {
                 const SizedBox(
                   height: 10,
                 ),
-                const Text('Use of Cholinestrase inhibitors with memantineSerotonin reuptake inhibitors like:',
-                  textAlign:TextAlign.center ,
+                const Text(
+                  'Use of Cholinestrase inhibitors with memantineSerotonin reuptake inhibitors like:',
+                  textAlign: TextAlign.center,
                   style: TextStyle(
                     fontSize: 20,
                     fontWeight: FontWeight.bold,
                   ),
-                ),const Text('.flouxetine \n.sertraline \n.Mirtazapine drug \n.venlafexine drug',
-                  textAlign:TextAlign.center ,
-                  style: TextStyle(
-                    fontSize: 18,
-                    color: AppTheme.grey
-                  ),
                 ),
-
-
+                const Text(
+                  '.flouxetine \n.sertraline \n.Mirtazapine drug \n.venlafexine drug',
+                  textAlign: TextAlign.center,
+                  style: TextStyle(fontSize: 18, color: AppTheme.grey),
+                ),
               ],
             ),
           ),
-        )
-
-    );
+        ));
   }
 }

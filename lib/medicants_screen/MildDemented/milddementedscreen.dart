@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:praecoxproject/views/home_screen/home_screen.dart';
 import 'package:praecoxproject/views/home_screen/layout_screen.dart';
 import '../../style/app_colors.dart';
 import '../EffectsTreatment/effectstreatmentscreen.dart';
+
 class MildDemntedScreen extends StatelessWidget {
   const MildDemntedScreen({super.key});
 
@@ -9,26 +11,35 @@ class MildDemntedScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          backgroundColor:const Color(0xFF404040) ,
+          backgroundColor: AppTheme.basieColor,
           shape: const RoundedRectangleBorder(
             borderRadius: BorderRadius.vertical(
               bottom: Radius.circular(45),
             ),
           ),
           leading: IconButton(
-            icon: const Icon(Icons.arrow_back,color: Colors.white,),
+            icon: const Icon(
+              Icons.arrow_back,
+              color: Colors.white,
+            ),
             onPressed: () {
-              Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>const LayoutScreen()));
+              Navigator.pushReplacement(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) =>  HomeScreen()));
             },
           ),
-          title: const Text('Medicants', style:
-          TextStyle(
-              color: Colors.white
-          ),),
+          title: const Text(
+            'Medicants',
+            style: TextStyle(color: Colors.white),
+          ),
           actions: [
             TextButton(
               onPressed: () {
-                Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>const EffectsTreatment ()));
+                Navigator.pushReplacement(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => const EffectsTreatment()));
               },
               child: const Text(
                 'Next',
@@ -39,7 +50,6 @@ class MildDemntedScreen extends StatelessWidget {
                 ),
               ),
             ),
-
             const SizedBox(width: 10),
           ],
         ),
@@ -55,8 +65,9 @@ class MildDemntedScreen extends StatelessWidget {
                       height: 120,
                       child: Image.asset("assets/images/Pills.png")),
                 ),
-                const Text('Memantine'
-                  ,style: TextStyle(
+                const Text(
+                  'Memantine',
+                  style: TextStyle(
                     fontSize: 22,
                     fontWeight: FontWeight.bold,
                   ),
@@ -195,7 +206,8 @@ class MildDemntedScreen extends StatelessWidget {
                 const SizedBox(
                   height: 10,
                 ),
-                const Text('Memantine is an antagonist of the N-methyl-D-aspartate receptor (NMDAR) subtype of glutamate receptor. Memantine is used to slow the neurotoxicity involved in Alzheimer disease and other neurodegenerative diseases.',
+                const Text(
+                  'Memantine is an antagonist of the N-methyl-D-aspartate receptor (NMDAR) subtype of glutamate receptor. Memantine is used to slow the neurotoxicity involved in Alzheimer disease and other neurodegenerative diseases.',
                   textAlign: TextAlign.center,
                   style: TextStyle(
                     fontSize: 16,
@@ -205,13 +217,15 @@ class MildDemntedScreen extends StatelessWidget {
                 const SizedBox(
                   height: 10,
                 ),
-                const Text('Adverse effect',
+                const Text(
+                  'Adverse effect',
                   style: TextStyle(
                     fontSize: 22,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
-                const Text('•Dizziness\n•Headache\n•Confusion.',
+                const Text(
+                  '•Dizziness\n•Headache\n•Confusion.',
                   textAlign: TextAlign.center,
                   style: TextStyle(
                     fontSize: 16,
@@ -221,13 +235,15 @@ class MildDemntedScreen extends StatelessWidget {
                 const SizedBox(
                   height: 10,
                 ),
-                const  Text( 'Drug drug Interaction',
+                const Text(
+                  'Drug drug Interaction',
                   style: TextStyle(
                     fontSize: 22,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
-                const Text('•Acetazolamide  •Amantadine \n•Brinzolamide  •Bupropion\n•Dextromethorphan  •Dorzolamide\n•Ketamine  •Levoketoconazole\n•Methazolamide  •Methotrexate\n•Sodium bicarbonate ',
+                const Text(
+                  '•Acetazolamide  •Amantadine \n•Brinzolamide  •Bupropion\n•Dextromethorphan  •Dorzolamide\n•Ketamine  •Levoketoconazole\n•Methazolamide  •Methotrexate\n•Sodium bicarbonate ',
                   textAlign: TextAlign.center,
                   style: TextStyle(
                     fontSize: 16,
@@ -237,26 +253,26 @@ class MildDemntedScreen extends StatelessWidget {
                 const SizedBox(
                   height: 10,
                 ),
-                const  Text( 'Note :',
+                const Text(
+                  'Note :',
                   style: TextStyle(
                     fontSize: 22,
                     fontWeight: FontWeight.bold,
                     color: Colors.red,
                   ),
-                ),const  Text( 'Drug can increase but not more than 28 mg',
-                  textAlign:  TextAlign.center,
+                ),
+                const Text(
+                  'Drug can increase but not more than 28 mg',
+                  textAlign: TextAlign.center,
                   style: TextStyle(
                     fontSize: 18,
                     fontWeight: FontWeight.bold,
                     color: Colors.red,
                   ),
                 ),
-
               ],
             ),
           ),
-        )
-
-    );
+        ));
   }
 }

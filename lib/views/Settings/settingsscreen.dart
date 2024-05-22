@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:ionicons/ionicons.dart';
+import 'package:praecoxproject/style/app_colors.dart';
+import 'package:praecoxproject/views/home_screen/home_screen.dart';
 import '../../widgets/forward_button.dart';
 import '../../widgets/setting_item.dart';
 import '../../widgets/setting_switch.dart';
 import '../Profile/profilescreen.dart';
 import '../home_screen/layout_screen.dart';
+
 class SettingsScreen extends StatefulWidget {
   const SettingsScreen({super.key});
 
@@ -19,12 +22,12 @@ class _SettingsScreenState extends State<SettingsScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title:const Text('Settings',style: TextStyle(
-          fontSize: 24,
-          fontWeight: FontWeight.bold,
-          color: Colors.white
-        ),),
-        backgroundColor: const Color(0xFF404040),
+        title: const Text(
+          'Settings',
+          style: TextStyle(
+              fontSize: 24, fontWeight: FontWeight.bold, color: Colors.white),
+        ),
+        backgroundColor: AppTheme.basieColor,
         shape: const RoundedRectangleBorder(
           borderRadius: BorderRadius.vertical(
             bottom: Radius.circular(50),
@@ -32,12 +35,15 @@ class _SettingsScreenState extends State<SettingsScreen> {
         ),
         leading: IconButton(
           onPressed: () {
-            Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>const LayoutScreen()));
+            Navigator.pushReplacement(context,
+                MaterialPageRoute(builder: (context) =>  HomeScreen()));
           },
-          icon: const Icon(Ionicons.chevron_back_outline,color: Colors.white,),
+          icon: const Icon(
+            Ionicons.chevron_back_outline,
+            color: Colors.white,
+          ),
         ),
         leadingWidth: 80,
-
       ),
       body: SingleChildScrollView(
         child: Padding(
@@ -58,7 +64,8 @@ class _SettingsScreenState extends State<SettingsScreen> {
                 width: double.infinity,
                 child: Row(
                   children: [
-                    Image.asset("assets/images/avatar.png", width: 70, height: 70),
+                    Image.asset("assets/images/avatar.png",
+                        width: 70, height: 70),
                     const SizedBox(width: 20),
                     const Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -86,7 +93,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (context) => const PatientProfile(),
+                            builder: (context) => PatientProfile(),
                           ),
                         );
                       },
@@ -104,11 +111,11 @@ class _SettingsScreenState extends State<SettingsScreen> {
               ),
               const SizedBox(height: 20),
               SettingItem(
-                title: "Language",
-                icon: Ionicons.earth,
+                title: "Diagnosis Report",
+                icon: Ionicons.folder,
                 bgColor: Colors.orange.shade100,
                 iconColor: Colors.orange,
-                value: "English",
+                value: "",
                 onTap: () {},
               ),
               const SizedBox(height: 20),
@@ -146,7 +153,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                 icon: Ionicons.information,
                 bgColor: Colors.orange.shade100,
                 iconColor: Colors.orange,
-                value: "information",
+                value: "info",
                 onTap: () {},
               ),
               const SizedBox(height: 20),

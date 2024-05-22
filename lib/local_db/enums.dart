@@ -1,8 +1,8 @@
 enum MyKeyCache{
+  diagnosticStage,
   isDark,
   onBoarding,
   email,
-  name,
   patientName,
   password,
   confirmPassword,

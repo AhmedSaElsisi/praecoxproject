@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:praecoxproject/views/home_screen/home_screen.dart';
 
 import '../medicants_screen/VeryMildDemented/verymilddementedscreen1.dart';
 import '../style/app_colors.dart';
@@ -21,7 +22,7 @@ class CustomMedicantScreen extends StatelessWidget {
           leading: IconButton(
             icon: const Icon(Icons.arrow_back,color: Colors.white,),
             onPressed: () {
-              Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>const LayoutScreen()));
+              Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=> HomeScreen()));
             },
           ),
           title: const Text('Medicants',style:

@@ -1,15 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:praecoxproject/cubit/patient_login_cubit/patient_login_state.dart';
+import 'package:praecoxproject/models/patient_login_model/patient_log_model.dart';
 import 'package:praecoxproject/style/app_colors.dart';
+import 'package:praecoxproject/views/home_screen/home_screen.dart';
 import 'package:praecoxproject/views/signup_screen/signup_screen.dart';
 import 'package:sizer/sizer.dart';
 import '../../../style/theme.dart';
 import '../../cubit/patient_login_cubit/patient_login_cubit.dart';
 import '../../widgets/custom_scaffold.dart';
+import '../home_screen/layout_screen.dart';
 
 class SignInScreen extends StatefulWidget {
-  const SignInScreen({super.key});
+   SignInScreen({super.key, this.patientLog});
+  final PatientLogin? patientLog;
+
 
   @override
   State<SignInScreen> createState() => _SignInScreenState();
@@ -19,12 +24,19 @@ class _SignInScreenState extends State<SignInScreen> {
   bool _isPasswordVisible = false;
   final _formSignInKey = GlobalKey<FormState>();
   bool rememberPassword = true;
+  PatientLogin? patientLog;
 
   @override
   Widget build(BuildContext context) {
-    return BlocConsumer<LoginCubit,LoginState >(
+    return BlocConsumer<LoginCubit, LoginState>(
       listener: (context, state) {
-
+        if (state is LoginSuccess){
+          Navigator.pushReplacement(
+              context,
+              MaterialPageRoute(
+                  builder: (context) =>
+                   HomeScreen()));
+        }
       },
       builder: (context, state) {
         var cubit = LoginCubit.get(context);
@@ -55,8 +67,8 @@ class _SignInScreenState extends State<SignInScreen> {
                                 padding: const EdgeInsets.only(left: 1),
                                 child: SizedBox(
                                     height: 50,
-                                    child: Image.asset(
-                                        'assets/images/logo.png')),
+                                    child:
+                                        Image.asset('assets/images/logo.png')),
                               ),
                               const Text(
                                 'Welcome',
@@ -72,7 +84,7 @@ class _SignInScreenState extends State<SignInScreen> {
                             height: 40.0,
                           ),
                           TextFormField(
-                            controller:cubit.userLogInController ,
+                            controller: cubit.userLogInController,
                             validator: (value) {
                               if (value == null || value.isEmpty) {
                                 return 'Please enter Email';
@@ -197,7 +209,10 @@ class _SignInScreenState extends State<SignInScreen> {
                                   backgroundColor: const Color(0xFF0F62FE),
                                 ),
                                 onPressed: () {
-                                  // Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>const LayoutScreen() ));
+                                  cubit.login();
+
+                                 //   print('name ${patientLog?.user?.name}');
+
                                   if (_formSignInKey.currentState!.validate() &&
                                       rememberPassword) {
                                     ScaffoldMessenger.of(context).showSnackBar(
@@ -213,9 +228,12 @@ class _SignInScreenState extends State<SignInScreen> {
                                     );
                                   }
                                 },
-                                child: const Text('Sign in', style: TextStyle(
-                                  color: AppTheme.white,
-                                ),),
+                                child: const Text(
+                                  'Sign in',
+                                  style: TextStyle(
+                                    color: AppTheme.white,
+                                  ),
+                                ),
                               ),
                             ),
                           ),
@@ -237,7 +255,7 @@ class _SignInScreenState extends State<SignInScreen> {
                                   Navigator.push(
                                     context,
                                     MaterialPageRoute(
-                                      builder: (e) => const SignupScreen(),
+                                      builder: (e) => const SignUpScreen(),
                                     ),
                                   );
                                 },

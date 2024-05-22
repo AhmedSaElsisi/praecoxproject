@@ -1,9 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:praecoxproject/views/Doctor/dr_signin.dart';
+import 'package:praecoxproject/views/home_screen/home_screen.dart';
+import 'package:praecoxproject/views/home_screen/layout_screen.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
+import '../../cubit/doctor_register_cubit/dr_register_cubit.dart';
+import '../../cubit/doctor_register_cubit/dr_register_state.dart';
+import '../../local_db/shared_preferences.dart';
+import '../../models/doctor_register_model/doctor_reg_model.dart';
 import '../../style/app_colors.dart';
 import '../../style/theme.dart';
 import '../../widgets/custom_scaffold.dart';
+import 'doctor_home_Screen.dart';
 
 class DrSignupScreen extends StatefulWidget {
   const DrSignupScreen({super.key});
@@ -18,9 +27,30 @@ class _DrSignupScreenState extends State<DrSignupScreen> {
   final _formSignupKey = GlobalKey<FormState>();
 
   bool agreePersonalData = true;
+  DoctorRegister? doctorReg;
+  Patient? patient;
+  Future<void>_printToken()async{
+    final prefs = await SharedPreferences.getInstance();
+    final token = prefs.getString('token');
+    print('Saved Token: $token');
+  }
 
   @override
   Widget build(BuildContext context) {
+    return BlocConsumer<DoctorRegisterCubit, DoctorRegisterState>(
+  listener: (context, state) {
+    if(state is DoctorRegisterSuccess){
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(
+            builder: (context) =>
+            ( DoctorHomeScreen())),
+
+      );
+    }
+  },
+  builder: (context, state) {
+    var cubit= DoctorRegisterCubit.get(context);
     return CustomScaffold(
     child: Column(
       children: [
@@ -76,6 +106,7 @@ class _DrSignupScreenState extends State<DrSignupScreen> {
                     ),
                     // full name
                     TextFormField(
+                      controller: cubit.doctorNameRegisterController,
                       validator: (value) {
                         if (value == null || value.isEmpty) {
                           return 'Please enter Full name';
@@ -107,6 +138,7 @@ class _DrSignupScreenState extends State<DrSignupScreen> {
                     ),
                     // email
                     TextFormField(
+                      controller: cubit.doctorEmailRegisterController,
                       validator: (value) {
                         if (value == null || value.isEmpty) {
                           return 'Please enter Email';
@@ -139,6 +171,7 @@ class _DrSignupScreenState extends State<DrSignupScreen> {
                       height: 25,
                     ),
                     TextFormField(
+                      controller: cubit.doctorDegreeRegisterController,
                       validator: (value) {
                         if (value == null || value.isEmpty) {
                           return 'Please enter Degree';
@@ -172,6 +205,7 @@ class _DrSignupScreenState extends State<DrSignupScreen> {
                     // gender
 
                     TextFormField(
+                      controller: cubit.doctorPhonedRegisterController,
                       validator: (value) {
                         if (value == null || value.isEmpty) {
                           return 'Please enter phone number';
@@ -206,6 +240,7 @@ class _DrSignupScreenState extends State<DrSignupScreen> {
                     // email
 
                     TextFormField(
+                      controller: cubit.doctorAddressRegisterController,
                       validator: (value) {
                         if (value == null || value.isEmpty) {
                           return 'Please enter address';
@@ -238,6 +273,7 @@ class _DrSignupScreenState extends State<DrSignupScreen> {
 
                     // password
                     TextFormField(
+                      controller: cubit.doctorPasswordRegisterController,
                       // obscureText: true,
                       obscuringCharacter: '*',
                       validator: (value) {
@@ -283,6 +319,7 @@ class _DrSignupScreenState extends State<DrSignupScreen> {
                     ),
                     const SizedBox(height: 25,),
                     TextFormField(
+                      controller: cubit.doctorPasswordConfirmationRegisterController,
                       // obscureText: true,
                       obscuringCharacter: '*',
                       validator: (value) {
@@ -372,12 +409,10 @@ class _DrSignupScreenState extends State<DrSignupScreen> {
                           backgroundColor: Color(0xFF0F62FE),
                         ),
                         onPressed: () {
-                          // Navigator.pushReplacement(
-                          //     context,
-                          //     MaterialPageRoute(
-                          //         builder: (context) =>
-                          //         (const RmiScreen()))
-                          // );
+                          cubit.doctorRegister();
+                          SharedPrefrenceHelper.getData(key: 'token');
+                          print(SharedPrefrenceHelper.getData(key: 'token'));
+                         // print(cubit.doctorReg!.patient!.name!);
                           if (_formSignupKey.currentState!.validate() &&
                               agreePersonalData) {
                             ScaffoldMessenger.of(context).showSnackBar(
@@ -443,5 +478,7 @@ class _DrSignupScreenState extends State<DrSignupScreen> {
       ],
     ),
     );
+  },
+);
   }
 }

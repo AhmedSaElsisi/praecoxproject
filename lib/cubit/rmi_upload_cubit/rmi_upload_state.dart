@@ -1,4 +1,5 @@
-part of 'rmi_upload_cubit.dart';
+
+import 'package:flutter/cupertino.dart';
 
 @immutable
 sealed class RmiUploadState {}

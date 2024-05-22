@@ -28,7 +28,7 @@ class LoginCubit extends Cubit<LoginState> {
             method: 'POST',
           ),
           data: {
-            'email': userLogInController.text,
+            'email': userLogInController.text ,
             'password': passwordLogInController.text,
           }
       );

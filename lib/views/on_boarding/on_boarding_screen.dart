@@ -27,81 +27,83 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       // appBar: AppBar(
-      body: SingleChildScrollView(
-        child: Padding(
-          padding: EdgeInsets.symmetric(horizontal: 3.w, vertical: 3.h),
-          child: Column(
-            children: [
-              isLast ?
-                Column(
-                  children: [
-                    const SizedBox(
-                      height: 10,
-                    ),
-                    SizedBox(
-                      height: 70,
-                      child: Image.asset(
-                        'assets/images/logo.png',
-                        fit: BoxFit.fill,
-                        height: 10.h,
+      body: SafeArea(
+        child: SingleChildScrollView(
+          child: Padding(
+            padding: EdgeInsets.symmetric(horizontal: 3.w, vertical: 3.h),
+            child: Column(
+              children: [
+                isLast ?
+                  Column(
+                    children: [
+                      const SizedBox(
+                        height: 10,
                       ),
-                    ),
-                    DefaultText(
-                      text: 'Congratulations!',
-                      textAlign: TextAlign.center,
-                      fontSize: 15.sp,
-                      fontWeight: FontWeight.bold,
-                      color: AppTheme.textOnColor,
-                    ),
-                  ],
-                ) : Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: [
-        Image.asset(
-          'assets/on_boarding/happiness 1.png',
-          fit: BoxFit.cover,
-        ),
-        TextButton(
-            onPressed: () {
-             Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=> const WelcomeScreen()));
-            },
-            child: const DefaultText(
-              text: 'Skip',
-              color: AppTheme.basieColor,
-            )),
-      ],),
-              SizedBox(
-                height: 73.h,
-                child: PageView.builder(
-                    onPageChanged: (index) {
-                      if (index == itemOnBoarding.length - 1) {
-                        setState(() {
-                          isLast = true;
-                        });
-                      } else {
-                        isLast = false;
-                      }
-                    },
-                    scrollDirection: Axis.horizontal,
-                    controller: controller,
-                    itemCount: itemOnBoarding.length,
-                    itemBuilder: (context, index) {
-                      return OnBoardingBuilder(
-                        onBoardingModel: itemOnBoarding[index],
-                      );
-                    }),
-              ),
-              SmoothPageIndicator(
-                controller: controller,
-                count: itemOnBoarding.length,
-                effect: const WormEffect(
-                  dotHeight: 10,
-                  dotWidth: 10,
-                  type: WormType.thinUnderground,
-                  activeDotColor: AppTheme.basieColor,
+                      SizedBox(
+                        height: 70,
+                        child: Image.asset(
+                          'assets/images/logo.png',
+                          fit: BoxFit.fill,
+                          height: 10.h,
+                        ),
+                      ),
+                      DefaultText(
+                        text: 'Congratulations!',
+                        textAlign: TextAlign.center,
+                        fontSize: 15.sp,
+                        fontWeight: FontWeight.bold,
+                        color: AppTheme.textOnColor,
+                      ),
+                    ],
+                  ) : Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Image.asset(
+            'assets/on_boarding/happiness 1.png',
+            fit: BoxFit.cover,
+          ),
+          TextButton(
+              onPressed: () {
+               Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=> const WelcomeScreen()));
+              },
+              child: const DefaultText(
+                text: 'Skip',
+                color: AppTheme.basieColor,
+              )),
+        ],),
+                SizedBox(
+                  height: 73.h,
+                  child: PageView.builder(
+                      onPageChanged: (index) {
+                        if (index == itemOnBoarding.length - 1) {
+                          setState(() {
+                            isLast = true;
+                          });
+                        } else {
+                          isLast = false;
+                        }
+                      },
+                      scrollDirection: Axis.horizontal,
+                      controller: controller,
+                      itemCount: itemOnBoarding.length,
+                      itemBuilder: (context, index) {
+                        return OnBoardingBuilder(
+                          onBoardingModel: itemOnBoarding[index],
+                        );
+                      }),
                 ),
-              ),
-            ],
+                SmoothPageIndicator(
+                  controller: controller,
+                  count: itemOnBoarding.length,
+                  effect: const WormEffect(
+                    dotHeight: 10,
+                    dotWidth: 10,
+                    type: WormType.thinUnderground,
+                    activeDotColor: AppTheme.basieColor,
+                  ),
+                ),
+              ],
+            ),
           ),
         ),
       ),

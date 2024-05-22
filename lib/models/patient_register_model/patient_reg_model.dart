@@ -1,14 +1,14 @@
-class PateintRegister {
-  String? stutes;
-  String? massage;
+class PatientRegister {
+  String? status;
+  String? message;
   String? token;
   Patient? patient;
 
-  PateintRegister({this.stutes, this.massage, this.token, this.patient});
+  PatientRegister({this.status, this.message, this.token, this.patient});
 
-  PateintRegister.fromJson(Map<String, dynamic> json) {
-    stutes = json['stutes'];
-    massage = json['massage'];
+  PatientRegister.fromJson(Map<String, dynamic> json) {
+    status = json['status'];
+    message = json['message'];
     token = json['token'];
     patient =
     json['patient'] != null ? new Patient.fromJson(json['patient']) : null;
@@ -16,8 +16,8 @@ class PateintRegister {
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['stutes'] = this.stutes;
-    data['massage'] = this.massage;
+    data['status'] = this.status;
+    data['message'] = this.message;
     data['token'] = this.token;
     if (this.patient != null) {
       data['patient'] = this.patient!.toJson();

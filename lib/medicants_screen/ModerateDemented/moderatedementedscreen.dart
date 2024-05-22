@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:praecoxproject/views/home_screen/home_screen.dart';
 import 'package:praecoxproject/views/home_screen/layout_screen.dart';
 import '../../style/app_colors.dart';
 import '../EffectsTreatment/effectstreatmentscreen.dart';
+
 class ModerateDemntedScreen extends StatelessWidget {
   const ModerateDemntedScreen({super.key});
 
@@ -9,26 +11,35 @@ class ModerateDemntedScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          backgroundColor:const Color(0xFF404040) ,
+          backgroundColor: AppTheme.basieColor,
           shape: const RoundedRectangleBorder(
             borderRadius: BorderRadius.vertical(
               bottom: Radius.circular(45),
             ),
           ),
           leading: IconButton(
-            icon: const Icon(Icons.arrow_back,color: Colors.white,),
+            icon: const Icon(
+              Icons.arrow_back,
+              color: Colors.white,
+            ),
             onPressed: () {
-              Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>const LayoutScreen()));
+              Navigator.pushReplacement(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) =>  HomeScreen()));
             },
           ),
-          title: const Text('Medicants', style:
-          TextStyle(
-              color: Colors.white
-          ),),
+          title: const Text(
+            'Medicants',
+            style: TextStyle(color: Colors.white),
+          ),
           actions: [
             TextButton(
               onPressed: () {
-                Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>const EffectsTreatment ()));
+                Navigator.pushReplacement(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => const EffectsTreatment()));
               },
               child: const Text(
                 'Next',
@@ -39,7 +50,6 @@ class ModerateDemntedScreen extends StatelessWidget {
                 ),
               ),
             ),
-
             const SizedBox(width: 10),
           ],
         ),
@@ -55,8 +65,9 @@ class ModerateDemntedScreen extends StatelessWidget {
                       height: 120,
                       child: Image.asset("assets/images/Pills.png")),
                 ),
-                const Text('Combination of memantine drug and donepezil drug ',
-                  textAlign:TextAlign.center ,
+                const Text(
+                  'Combination of memantine drug and donepezil drug ',
+                  textAlign: TextAlign.center,
                   style: TextStyle(
                     fontSize: 22,
                     fontWeight: FontWeight.bold,
@@ -193,8 +204,8 @@ class ModerateDemntedScreen extends StatelessWidget {
                     ],
                   ),
                 ),
-
-                const Text('Go back to the doctor.',
+                const Text(
+                  'Go back to the doctor.',
                   textAlign: TextAlign.center,
                   style: TextStyle(
                     fontSize: 18,
@@ -204,13 +215,15 @@ class ModerateDemntedScreen extends StatelessWidget {
                 const SizedBox(
                   height: 10,
                 ),
-                const Text('Adverse effect',
+                const Text(
+                  'Adverse effect',
                   style: TextStyle(
                     fontSize: 22,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
-                const Text('•Dizziness\n•Headache\n•Confusion \n•vomiting, diarrhea and abdominal cramp\n•Increased rate of syncope bradycardia \n•pacemaker insertion',
+                const Text(
+                  '•Dizziness\n•Headache\n•Confusion \n•vomiting, diarrhea and abdominal cramp\n•Increased rate of syncope bradycardia \n•pacemaker insertion',
                   textAlign: TextAlign.center,
                   style: TextStyle(
                     fontSize: 16,
@@ -220,13 +233,15 @@ class ModerateDemntedScreen extends StatelessWidget {
                 const SizedBox(
                   height: 10,
                 ),
-                const  Text( 'Drug drug Interaction',
+                const Text(
+                  'Drug drug Interaction',
                   style: TextStyle(
                     fontSize: 22,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
-                const Text('•Acetazolamide  •Amantadine \n•Brinzolamide  •Bupropion\n•Dextromethorphan  •Dorzolamide\n•Ketamine  •Levoketoconazole\n•Methazolamide  •Methotrexate\n•Sodium bicarbonate ',
+                const Text(
+                  '•Acetazolamide  •Amantadine \n•Brinzolamide  •Bupropion\n•Dextromethorphan  •Dorzolamide\n•Ketamine  •Levoketoconazole\n•Methazolamide  •Methotrexate\n•Sodium bicarbonate ',
                   textAlign: TextAlign.center,
                   style: TextStyle(
                     fontSize: 16,
@@ -236,12 +251,9 @@ class ModerateDemntedScreen extends StatelessWidget {
                 const SizedBox(
                   height: 10,
                 ),
-
               ],
             ),
           ),
-        )
-
-    );
+        ));
   }
 }

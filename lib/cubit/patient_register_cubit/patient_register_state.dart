@@ -2,16 +2,12 @@
 import 'package:flutter/cupertino.dart';
 
 @immutable
-abstract class RegisterState {}
+abstract class PatientRegisterState {}
 
-class RegisterInitial extends RegisterState {}
-class RegisterSuccess extends RegisterState {}
-class RegisterLoading extends RegisterState {}
-class RegisterError extends  RegisterState{
+class RegisterInitial extends PatientRegisterState {}
+class RegisterSuccess extends PatientRegisterState {}
+class RegisterLoading extends PatientRegisterState {}
+class RegisterError extends  PatientRegisterState{
   final String message;
   RegisterError(this.message);
 }
-class UploadImageSuccess extends RegisterState {}
-
-class UploadImageLoading extends RegisterState {}
-class UploadImageError extends RegisterState {}

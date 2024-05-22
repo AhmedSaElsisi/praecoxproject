@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:praecoxproject/medicants_screen/VeryMildDemented/verymilddementedscreen2.dart';
+import 'package:praecoxproject/views/home_screen/home_screen.dart';
 import '../../style/app_colors.dart';
 import '../../views/home_screen/layout_screen.dart';
+
 class VeryMildDementedScreen extends StatelessWidget {
   const VeryMildDementedScreen({super.key});
 
@@ -9,26 +11,35 @@ class VeryMildDementedScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          backgroundColor:const Color(0xFF404040) ,
+          backgroundColor: AppTheme.basieColor,
           shape: const RoundedRectangleBorder(
             borderRadius: BorderRadius.vertical(
               bottom: Radius.circular(45),
             ),
           ),
           leading: IconButton(
-            icon: const Icon(Icons.arrow_back,color: Colors.white,),
+            icon: const Icon(
+              Icons.arrow_back,
+              color: Colors.white,
+            ),
             onPressed: () {
-              Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>const LayoutScreen()));
+              Navigator.pushReplacement(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) =>  HomeScreen()));
             },
           ),
-          title: const Text('Medicants',style:
-          TextStyle(
-              color: Colors.white
-          ),),
+          title: const Text(
+            'Medicants',
+            style: TextStyle(color: Colors.white),
+          ),
           actions: [
             TextButton(
               onPressed: () {
-                Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>const VeryMildDementedScreen2()));
+                Navigator.pushReplacement(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => const VeryMildDementedScreen2()));
               },
               child: const Text(
                 'Next',
@@ -54,8 +65,9 @@ class VeryMildDementedScreen extends StatelessWidget {
                       height: 120,
                       child: Image.asset("assets/images/Pills.png")),
                 ),
-                const Text('Donepezil'
-                  ,style: TextStyle(
+                const Text(
+                  'Donepezil',
+                  style: TextStyle(
                     fontSize: 22,
                     fontWeight: FontWeight.bold,
                   ),
@@ -205,13 +217,15 @@ class VeryMildDementedScreen extends StatelessWidget {
                 const SizedBox(
                   height: 10,
                 ),
-               const Text('Adverse effect',
+                const Text(
+                  'Adverse effect',
                   style: TextStyle(
                     fontSize: 22,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
-                const Text('\r•nausea \nvomiting, diarrhea and abdominal cramp\n•Increased rate of syncope bradycardia \n•pacemaker insertion ',
+                const Text(
+                  '\r•nausea \nvomiting, diarrhea and abdominal cramp\n•Increased rate of syncope bradycardia \n•pacemaker insertion ',
                   textAlign: TextAlign.center,
                   style: TextStyle(
                     fontSize: 16,
@@ -221,25 +235,24 @@ class VeryMildDementedScreen extends StatelessWidget {
                 const SizedBox(
                   height: 10,
                 ),
-              const  Text( 'Drug drug Interaction',
+                const Text(
+                  'Drug drug Interaction',
                   style: TextStyle(
                     fontSize: 22,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
-                const Text(' \r  •Atropine \n•Benztropine(cogentin) \n•Trihexyphenidyl(artane)',
+                const Text(
+                  ' \r  •Atropine \n•Benztropine(cogentin) \n•Trihexyphenidyl(artane)',
                   textAlign: TextAlign.center,
                   style: TextStyle(
                     fontSize: 16,
                     color: AppTheme.grey,
                   ),
                 ),
-
               ],
             ),
           ),
-        )
-
-    );
+        ));
   }
 }
