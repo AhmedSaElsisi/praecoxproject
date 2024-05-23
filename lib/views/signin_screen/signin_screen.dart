@@ -37,6 +37,9 @@ class _SignInScreenState extends State<SignInScreen> {
                   builder: (context) =>
                    HomeScreen()));
         }
+     else if (state is LoginLoading){
+        CircularProgressIndicator();
+        }
       },
       builder: (context, state) {
         var cubit = LoginCubit.get(context);
@@ -210,7 +213,6 @@ class _SignInScreenState extends State<SignInScreen> {
                                 ),
                                 onPressed: () {
                                   cubit.login();
-
                                  //   print('name ${patientLog?.user?.name}');
 
                                   if (_formSignInKey.currentState!.validate() &&

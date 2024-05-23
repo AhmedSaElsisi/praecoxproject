@@ -168,13 +168,12 @@ class _RmiUploadState extends State<RmiUpload>
                                   .then((value) {
                                 //SharedPrefrenceHelper.saveData(key: 'key', value: cubit.rmiUploadModel);
                                 //CashHelper.putString(key: MyKeyCache.diagnosticStage, value: cubit.rmiUploadModel!.diagnosticStage!);
+                               SharedPrefrenceHelper.saveData(key: 'diagnos', value: cubit.rmiUploadModel!
+                                   .diagnosticStage!);
                                 Navigator.pushReplacement(
                                     context,
                                     MaterialPageRoute(
-                                        builder: (context) => ShowDignose(
-                                              data: cubit.rmiUploadModel!
-                                                  .diagnosticStage!,
-                                            )));
+                                        builder: (context) => ShowDignose()));
                                 print(cubit.rmiUploadModel!.diagnosticStage!);
                                 print(cubit.rmiUploadModel!.descriptionDiagnosis!);
                               });

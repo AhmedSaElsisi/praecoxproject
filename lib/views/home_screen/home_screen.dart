@@ -5,6 +5,7 @@ import 'package:iconsax/iconsax.dart';
 import 'package:praecoxproject/cubit/doctor_register_cubit/dr_register_state.dart';
 import 'package:praecoxproject/cubit/patient_login_cubit/patient_login_state.dart';
 import 'package:praecoxproject/cubit/patient_register_cubit/patient_register_state.dart';
+import 'package:praecoxproject/local_db/shared_preferences.dart';
 import 'package:praecoxproject/views/Profile/profilescreen.dart';
 import 'package:praecoxproject/views/on_boarding/on_boarding_screen.dart';
 import 'package:sizer/sizer.dart';
@@ -30,31 +31,23 @@ import '../../widgets/events_builder.dart';
 import '../../widgets/overview_card_builder.dart';
 
 class HomeScreen extends StatefulWidget {
-   HomeScreen({
+  HomeScreen({
     super.key,
-    this.dignosis,
-     this.patientLog
-
   });
 
-  final String? dignosis;
-   final PatientLogin? patientLog;
-
-
+  String? dignosis= SharedPrefrenceHelper.getData(key: 'diagnos');
 
   @override
   State<HomeScreen> createState() => _HomeScreenState();
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  late HomeCubit cubit1;
-
-
   @override
   void initState() {
+    HomeCubit.get(context).getProfileData();
+    print(widget.dignosis);
+
     super.initState();
-    cubit1 = HomeCubit.get(context);
-    cubit1.changeIndex(0);
   }
 
   void _navigateToPage(int index) {
@@ -67,13 +60,15 @@ class _HomeScreenState extends State<HomeScreen> {
         page = OnBoardingScreen(); // Replace with actual message screen widget
         break;
       case 2:
-        page = ProviderScope(child: FlutterRiverpodTodoApp()); // Replace with actual archive screen widget
+        page = ProviderScope(
+            child:
+                FlutterRiverpodTodoApp()); // Replace with actual archive screen widget
         break;
       case 3:
         page = PatientProfile(); // Replace with actual settings screen widget
         break;
       default:
-        page = HomeScreen(dignosis: widget.dignosis);
+        page = HomeScreen();
     }
     Navigator.push(
       context,
@@ -83,14 +78,19 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocConsumer<PatientRegisterCubit, PatientRegisterState>(
-      listener: (context, state) {},
+    return BlocConsumer<HomeCubit, HomeState>(
+      listener: (context, state) {
+        if (state is GetDataLoading){
+          CircularProgressIndicator();
+        }
+      },
       builder: (context, state) {
-        var cubit = PatientRegisterCubit.get(context);
+        var cubit1 = HomeCubit.get(context);
         return Scaffold(
           appBar: AppBar(
             backgroundColor: AppTheme.transparent,
             elevation: 0.0,
+            leading: Text(''),
             title: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -99,10 +99,9 @@ class _HomeScreenState extends State<HomeScreen> {
                   color: AppTheme.black,
                 ),
                 GestureDetector(
-                  onTap: () {
-                  },
+                  onTap: () {},
                   child: Text(
-                  'ahmed',
+                    cubit1.profileData!.data!.name!,
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
                       color: AppTheme.basieColor,
@@ -217,7 +216,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                               ),
                                             ],
                                           ),
-                                           SizedBox(width: 30.w),
+                                          SizedBox(width: 30.w),
                                           IconButton(
                                             onPressed: () {},
                                             icon: const Icon(Iconsax.setting_3),
@@ -304,21 +303,24 @@ class _HomeScreenState extends State<HomeScreen> {
                                 Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                      builder: (e) => const MildDemntedScreen()),
+                                      builder: (e) =>
+                                          const MildDemntedScreen()),
                                 );
                               } else if (widget.dignosis ==
                                   'VeryMildDemented') {
                                 Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                      builder: (e) => const VeryMildDementedScreen()),
+                                      builder: (e) =>
+                                          const VeryMildDementedScreen()),
                                 );
                               } else if (widget.dignosis ==
                                   'ModerateDemented') {
                                 Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                      builder: (e) => const ModerateDemntedScreen()),
+                                      builder: (e) =>
+                                          const ModerateDemntedScreen()),
                                 );
                               }
                             },
@@ -327,7 +329,6 @@ class _HomeScreenState extends State<HomeScreen> {
                             ),
                           ),
                           InkWell(
-
                             child: OverviewCardBuilder(
                               overviewCardModel: itemOverviewCardModel[1],
                             ),
@@ -345,14 +346,16 @@ class _HomeScreenState extends State<HomeScreen> {
                                 Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                      builder: (e) => const VeryMildCareScreen()),
+                                      builder: (e) =>
+                                          const VeryMildCareScreen()),
                                 );
                               } else if (widget.dignosis ==
                                   'ModerateDemented') {
                                 Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                      builder: (e) => const ModerateCareScreen()),
+                                      builder: (e) =>
+                                          const ModerateCareScreen()),
                                 );
                               }
                             },
@@ -490,53 +493,49 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
             ),
           ),
-          bottomNavigationBar: BlocBuilder<HomeCubit, HomeState>(
-            builder: (context, state) {
-              return BottomNavigationBar(
-                backgroundColor: AppTheme.white,
-                elevation: 0,
-                currentIndex: cubit1.currentIndex,
-                onTap: (index) {
-                  setState(() {
-                    cubit1.changeIndex(index);
-                  });
-                  _navigateToPage(index);
-                },
-                selectedItemColor: AppTheme.basieColor,
-                selectedLabelStyle: TextStyle(
-                  color: AppTheme.basieColor,
-                  fontSize: 9.sp,
-                  fontWeight: FontWeight.w500,
-                ),
-                selectedIconTheme: const IconThemeData(
-                  color: AppTheme.basieColor,
-                ),
-                unselectedItemColor: AppTheme.grey,
-                type: BottomNavigationBarType.fixed,
-                items: [
-                  BottomNavigationBarItem(
-                    icon: const Icon(Iconsax.home),
-                    activeIcon: const Icon(Iconsax.home_15),
-                    label: 'Home',
-                  ),
-                  BottomNavigationBarItem(
-                    icon: const Icon(Iconsax.message),
-                    activeIcon: const Icon(Iconsax.message5),
-                    label: 'Messages',
-                  ),
-                  BottomNavigationBarItem(
-                    icon: const Icon(Iconsax.archive_minus),
-                    activeIcon: const Icon(Iconsax.archive_minus5),
-                    label: 'Note',
-                  ),
-                  BottomNavigationBarItem(
-                    icon: const Icon(Iconsax.frame_1),
-                    activeIcon: const Icon(Iconsax.frame5),
-                    label: 'Profile',
-                  ),
-                ],
-              );
+          bottomNavigationBar: BottomNavigationBar(
+            backgroundColor: AppTheme.white,
+            elevation: 0,
+            currentIndex: cubit1.currentIndex,
+            onTap: (index) {
+
+              cubit1.changeIndex(index);
+
+              _navigateToPage(index);
             },
+            selectedItemColor: AppTheme.basieColor,
+            selectedLabelStyle: TextStyle(
+              color: AppTheme.basieColor,
+              fontSize: 9.sp,
+              fontWeight: FontWeight.w500,
+            ),
+            selectedIconTheme: const IconThemeData(
+              color: AppTheme.basieColor,
+            ),
+            unselectedItemColor: AppTheme.grey,
+            type: BottomNavigationBarType.fixed,
+            items: [
+              BottomNavigationBarItem(
+                icon: const Icon(Iconsax.home),
+                activeIcon: const Icon(Iconsax.home_15),
+                label: 'Home',
+              ),
+              BottomNavigationBarItem(
+                icon: const Icon(Iconsax.message),
+                activeIcon: const Icon(Iconsax.message5),
+                label: 'Messages',
+              ),
+              BottomNavigationBarItem(
+                icon: const Icon(Iconsax.archive_minus),
+                activeIcon: const Icon(Iconsax.archive_minus5),
+                label: 'Note',
+              ),
+              BottomNavigationBarItem(
+                icon: const Icon(Iconsax.frame_1),
+                activeIcon: const Icon(Iconsax.frame5),
+                label: 'Profile',
+              ),
+            ],
           ),
         );
       },
