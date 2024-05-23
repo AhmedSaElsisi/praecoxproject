@@ -3,6 +3,7 @@ import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:praecoxproject/cubit/rmi_upload_cubit/rmi_upload_state.dart';
+import 'package:praecoxproject/local_db/shared_preferences.dart';
 import 'package:praecoxproject/models/patient_login_model/patient_log_model.dart';
 import '../../models/patient_register_model/patient_reg_model.dart';
 import '../../models/rmi_upload_model/rmi_upload_model.dart';
@@ -15,6 +16,8 @@ class RmiUploadCubit extends Cubit<RmiUploadState> {
   PatientRegister? patientReg;
   //RmiUpload? rmi;
   Future rmiUpload({String? imagePath, String? imageName}) async {
+    String token=SharedPrefrenceHelper.getData(key: 'token');
+    print(token);
     var data = FormData.fromMap({
       'image': [await MultipartFile.fromFile(imagePath!, filename: imageName)],
     });
@@ -25,7 +28,7 @@ class RmiUploadCubit extends Cubit<RmiUploadState> {
           options: Options(headers: {
             'Accept': 'application/json',
             'Content-Type': 'application/json',
-            'Authorization':patientReg!.token,
+            'Authorization':'Bearer $token',
           }, method: 'POST'),
           data: data);
       if (response.statusCode == 200) {

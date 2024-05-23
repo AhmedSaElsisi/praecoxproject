@@ -18,8 +18,8 @@ import 'cubit/rmi_upload_cubit/rmi_upload_cubit.dart';
 import 'cubit/rmi_upload_cubit/rmi_upload_state.dart';
 
 class ShowDignose extends StatefulWidget {
-  const ShowDignose({super.key ,required this.data,});
-  final String data;
+  const ShowDignose({super.key });
+
 
   @override
   State<ShowDignose> createState() => _ShowDignoseState();
@@ -97,7 +97,7 @@ class _ShowDignoseState extends State<ShowDignose> {
                           backgroundColor: Color(0xFF0F62FE),
                         ),
                         onPressed: (){
-                      Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>HomeScreen(dignosis: cubit.rmiUploadModel!.diagnosticStage!)));
+                      Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>HomeScreen()));
                     }, child: Text('Go to home',style: TextStyle(
                       color: AppTheme.white
                     ),)),

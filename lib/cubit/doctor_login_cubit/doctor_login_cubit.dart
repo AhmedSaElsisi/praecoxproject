@@ -1,8 +1,10 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:praecoxproject/local_db/shared_preferences.dart';
 
 import '../../models/doctor_login_model/doctor_log_model.dart';
+
 part 'doctor_login_state.dart';
 
 class DoctorLoginCubit extends Cubit<DoctorLoginState> {
@@ -13,27 +15,26 @@ class DoctorLoginCubit extends Cubit<DoctorLoginState> {
   TextEditingController userDoctorLogInController = TextEditingController();
   DoctorLogin? doctorLog;
 
-
   Future doctorLogin() async {
     try {
       emit(DoctorLoginLoading());
       var response = await Dio()
           .request('https://praecox.future-developers.cloud/api/loginDoctor',
-          options: Options(
-            headers: {'Content-Type': 'application/x-www-form-urlencoded'},
-            method: 'POST',
-          ),
-          data: {
+              options: Options(
+                headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+                method: 'POST',
+              ),
+              data: {
             'email': userDoctorLogInController.text,
             'password': passwordDoctorLogInController.text,
-          }
-      );
+          });
 
       if (response.statusCode == 200) {
         emit(DoctorLoginSuccess());
         doctorLog = DoctorLogin.fromJson(response.data);
+        SharedPrefrenceHelper.saveData(key: 'token', value: doctorLog!.token);
       } else {
-        emit(DoctorLoginError('Login failed. Please check your credentials.'));
+         emit(DoctorLoginError('Login failed. Please check your credentials.'));
       }
     } catch (error) {
       print(error);

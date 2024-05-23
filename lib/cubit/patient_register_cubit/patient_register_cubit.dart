@@ -2,6 +2,7 @@ import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:praecoxproject/cubit/patient_register_cubit/patient_register_state.dart';
+import 'package:praecoxproject/local_db/shared_preferences.dart';
 import '../../models/patient_register_model/patient_reg_model.dart';
 import '../../models/rmi_upload_model/rmi_upload_model.dart';
 
@@ -43,6 +44,8 @@ class PatientRegisterCubit extends Cubit<PatientRegisterState> {
       if (response.statusCode == 200) {
         emit(RegisterSuccess());
         patientReg = PatientRegister.fromJson(response.data);
+        print(patientReg!.token);
+        SharedPrefrenceHelper.saveData(key: 'token', value:patientReg!.token );
       } else {
         emit(RegisterError('Register failed. Please check your credentials.'));
       }

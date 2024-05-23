@@ -476,7 +476,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                       content: Text('Processing Data'),
                                     ),
                                   );
-                                  print(cubit.patientReg?.token);
+                                  print(cubit.nameRegisterController.text);
                                   print(cubit.addressRegisterController.text);
                                   print(cubit.phoneRegisterController.text);
                                   print(cubit.ageRegisterController.text);
